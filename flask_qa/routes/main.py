@@ -84,7 +84,7 @@ def login():
             return redirect("/login")
 
         # Query database for username and password
-        user_check = users.query.filter_by(username = request.form.get("username")).fisrt()   
+        user_check = users.query.filter_by(username = request.form.get("username")).first()   
         
         # Ensure username exists and password is correct
         if user_check == None or not check_password_hash(user_check._hash, request.form.get("password")):
@@ -108,7 +108,7 @@ def register():
     if request.method == 'POST':
 
         # Query for username
-        username_check = users.query.filter_by(username = request.form.get("username")).all()
+        username_check = users.query.filter_by(username = request.form.get("username")).first()
 
         # Ensure username was submitted
         if not request.form.get("username"):
