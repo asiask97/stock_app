@@ -44,7 +44,7 @@ def home():
             return redirect("/login")
 
         # Getting user portfoilio
-        user_portfolio = portfolio.query.filter_by(user = session["user_id"]).all()
+        user_portfolio = portfolio.query.filter_by(user = session["user_id"]).first()
         all_stocks_cash = 0
 
         # Getting the symbols
@@ -87,7 +87,7 @@ def login():
         user_check = users.query.filter_by(username = request.form.get("username")).all()   
         
         # Ensure username exists and password is correct
-        if username_check == False or not check_password_hash(user_check.password, request.form.get("password")):
+        if user_check == None or not check_password_hash(user_check.password, request.form.get("password")):
             flash("invalid username and/or password")
             return redirect("/login")
 
