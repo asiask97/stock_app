@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in user_portfolio %}
+            <tr>
+                {% set data = i.live_price*i.stock_amount%}
+                <td>{{ i.stock_symbol }}</td>
+                <td>{{ i.stock_name }}</td>
+                <td>{{ i.stock_amount }}</td>
+                <td>{{ i.live_price |round(2)}}</td>
+                <td>${{'%0.2f' % data|float}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4" class="cash">CASH</td>
+                <td>${{ with_out }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td><b>${{ with_stocks }}</b></td>
+            </tr>
+        </tfoot>
+    </table>
+    
+{% endblock %}
+
+
