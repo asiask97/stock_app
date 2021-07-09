@@ -44,16 +44,19 @@ def home():
             return redirect("/login")
 
         # Getting user portfoilio
-        user_portfolio = portfolio.query.filter_by(user = session["user_id"]).first()
+        user_portfolio = portfolio.query.filter_by(user = session["user_id"]).all()
         all_stocks_cash = 0
 
         # Getting the symbols
-        for stock in user_portfolio:
+        if user_portfolio == None:
+            return render_template("index.html")
+        else:
+            for stock in user_portfolio:
 
-            live_data = api_request(stock.stock_symbol)
-            amount_bought = stock.stock_amount
-            stock.live_price = live_data['price']
-            all_stocks_cash += amount_bought * live_data['price']
+                live_data = api_request(stock.stock_symbol)
+                amount_bought = stock.stock_amount
+                stock.live_price = live_data['price']
+                all_stocks_cash += amount_bought * live_data['price']
 
         # Displaying users cash status
         user_cash = users.query.filter_by(_id = session["user_id"]).first()
