@@ -6,26 +6,27 @@
 
 {% block main %}
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Shares</th>
-                <th>Price</th>
-                <th>Transacted</th>
+    <div class="tablecontainer ">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Transacted</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            {% for data in trans %}
-            <tr>
-                <td>{{ data.stock_symbol }}</td>
-                <td>{{ data.stock_amount }}</td>
-                <td>{{ data.price }}</td>
-                <td>{{ data.created_at }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in trans %}
+                <tr>
+                    <td>{{ data.stock_symbol }}</td>
+                    <td>{{ data.stock_amount }}</td>
+                    <td>{{ data.price }}</td>
+                    <td>{{ data.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
