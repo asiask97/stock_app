@@ -92,7 +92,7 @@ def login():
             return redirect("/login")
 
         # Remember which user has logged in
-        session["user_id"] = id_check
+        session["user_id"] = user_check._id
 
         # Redirect user to home page
         return redirect("/")
