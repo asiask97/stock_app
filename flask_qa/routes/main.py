@@ -84,7 +84,7 @@ def login():
             return redirect("/login")
 
         # Query database for username and password
-        user_check = users.query.filter_by(username = request.form.get("username")).all()   
+        user_check = users.query.filter_by(username = request.form.get("username")).fisrt()   
         
         # Ensure username exists and password is correct
         if user_check == None or not check_password_hash(user_check._hash, request.form.get("password")):
