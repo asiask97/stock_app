@@ -70,7 +70,7 @@ def home():
 @main.route("/login", methods=["GET", "POST"])
 def login():
     
-    # User reached route via POST (as by submitting a form via POST)
+   # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
         # Ensure username was submitted
@@ -84,28 +84,29 @@ def login():
             return redirect("/login")
 
         # Query database for username and password
-        user_check = users.query.filter_by(username = request.form.get("username")).all()   
-        
+        user_check = users.query.filter_by(username = request.form.get("username")).first()   
+
         # Ensure username exists and password is correct
-        if username_check == False or not check_password_hash(user_check.password, request.form.get("password")):
+        if user_check == None or not check_password_hash(user_check._hash, request.form.get("password")):
             flash("invalid username and/or password")
             return redirect("/login")
 
         # Remember which user has logged in
-        session["user_id"] = id_check
+        session["user_id"] = user_check._id
 
         # Redirect user to home page
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
+
         return render_template("login.html")
 
 
 
 @main.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == 'POST':
+   if request.method == 'POST':
 
         # Query for username
         username_check = users.query.filter_by(username = request.form.get("username")).all()
@@ -150,6 +151,7 @@ def register():
 
     else:
         return render_template("register.html")    
+
 
 @main.route("/quote", methods=["GET", "POST"])
 def quote():
