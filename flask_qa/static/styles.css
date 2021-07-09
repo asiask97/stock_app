@@ -1,0 +1,15 @@
+@media only screen and (max-width: 600px) {
+
+    .p-5 {
+        padding: 1rem!important;
+    }
+  }
+
+.tablecontainer{
+    position: relative;
+    padding: 1rem;
+    margin: 1rem -.75rem 0;
+    border: solid #dee2e6;
+    border-width: 1px 0 0;
+  }
+  
